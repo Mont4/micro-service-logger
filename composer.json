@@ -1,0 +1,50 @@
+{
+  "name": "mont4/micro-service-logger",
+  "description": "A micro service logger",
+  "license": "MIT",
+  "keywords": [
+    "micro",
+    "service",
+    "logger"
+  ],
+  "type": "library",
+  "authors": [
+    {
+      "name": "",
+      "email": ""
+    }
+  ],
+  "require": {
+    "php": ">=7.2",
+    "illuminate/support": "^6.0"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^4.0",
+    "phpunit/phpunit": "^8.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Mont4\\MicroServiceLogger\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Mont4\\MicroServiceLogger\\Tests\\": "tests"
+    }
+  },
+  "scripts": {
+    "phpunit": "phpunit"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Mont4\\MicroServiceLogger\\ServiceProvider"
+      ]
+    }
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
+  }
+}

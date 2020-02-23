@@ -1,0 +1,48 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateLogsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('logs', function (Blueprint $table) {
+            $levels = array_map(function ($level) {
+                return \Monolog\Logger::getLevelName($level);
+            }, \Monolog\Logger::getLevels());
+
+            $table->bigIncrements('id');
+
+            $table->uuid('request_uuid')->index();
+            $table->string('service')->index();
+            $table->string('token')->index();
+
+            $table->string('channel')->nullable();
+            $table->integer('level')->default(0);
+            $table->enum('level_name', $levels);
+
+            $table->text('message')->nullable();
+            $table->longText('context')->nullable();
+            $table->text('extra')->nullable();
+
+            $table->timestamp('event_at')->index();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('logs');
+    }
+}
