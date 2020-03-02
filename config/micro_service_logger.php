@@ -6,8 +6,9 @@ return [
     'service_name'        => 'Website',
     'force_generate_uuid' => env('MICRO_LOG_FORCE_GENERATE_UUID', false),
 
-    'db_connection' => env('MICRO_LOG_DB_CONNECTION'),
-    'details'       => env('MICRO_LOG_DETAILS', true),
+    'db_connection'   => env('MICRO_LOG_DB_CONNECTION'),
+    'details'         => env('MICRO_LOG_DETAILS', true),
+    'log_all_request' => env('LOG_ALL_REQUEST', false),
 
     'queue_enable'     => env('MICRO_LOG_QUEUE_ENABLE', false),
     'queue_connection' => env('MICRO_LOG_QUEUE_CONNECTION', env('QUEUE_CONNECTION', 'sync')),

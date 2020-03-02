@@ -17,8 +17,13 @@ class MicroServiceLoggerMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (config('micro_service_logger.force_generate_uuid') || !$request->headers->has('logger_uuid'))
+        $config = config('micro_service_logger');
+
+        if ($config['force_generate_uuid'] || !$request->headers->has('logger_uuid'))
             $request->headers->set('logger_uuid', Str::uuid());
+
+        if ($config['log_all_request'])
+            \Log::info('');
 
         return $next($request);
     }

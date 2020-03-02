@@ -14,7 +14,10 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property string $request_uuid
  * @property string $service
+ *
  * @property string $token
+ * @property string $user_table
+ * @property string $user_id
  *
  * @property string $channel
  * @property int    $level
@@ -30,8 +33,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Log extends Model
 {
-    public $timestamps = false;
-    protected $casts = [
+    public    $timestamps = false;
+    protected $casts      = [
         'context' => 'json',
         'extra'   => 'json',
     ];

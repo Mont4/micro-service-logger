@@ -15,7 +15,10 @@ class LogToDBJob implements ShouldQueue
 
     private $record;
     private $request_uuid;
+
     private $token;
+    private $userTable;
+    private $userId;
 
     /**
      * Create a new job instance.
@@ -25,8 +28,11 @@ class LogToDBJob implements ShouldQueue
     public function __construct($record)
     {
         $this->request_uuid = app('request')->headers->get('logger_uuid');
-        $this->token        = str_replace('Bearer ', '', app('request')->headers->get('Authorization'));
         $this->record       = $record;
+
+        $this->token     = str_replace('Bearer ', '', app('request')->headers->get('Authorization'));
+        $this->userTable = auth()->user()->getTable();
+        $this->userId    = auth()->user()->getAuthIdentifier();
     }
 
     /**
@@ -48,9 +54,12 @@ class LogToDBJob implements ShouldQueue
 
         $log->request_uuid = $this->request_uuid;
         $log->service      = $config['service_name'];
-        $log->token        = $this->token;
 
-        $log->channel      = $this->record['channel'];
+        $log->token      = $this->token;
+        $log->user_table = $this->userTable;
+        $log->user_id    = $this->userId;
+
+        $log->channel    = $this->record['channel'];
         $log->level      = $this->record['level'];
         $log->level_name = $this->record['level_name'];
 
