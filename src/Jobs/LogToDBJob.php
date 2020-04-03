@@ -31,8 +31,11 @@ class LogToDBJob implements ShouldQueue
         $this->record       = $record;
 
         $this->token     = str_replace('Bearer ', '', app('request')->headers->get('Authorization'));
-        $this->userTable = auth()->user()->getTable();
-        $this->userId    = auth()->user()->getAuthIdentifier();
+        
+        if ($user = auth()->user()) {
+            $this->userTable = $user->getTable();
+            $this->userId    = $user->getAuthIdentifier();
+        }
     }
 
     /**
