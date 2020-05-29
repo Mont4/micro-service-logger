@@ -1,6 +1,6 @@
 <?php
 
-namespace Mont4\MicroServiceLogger;
+namespace Mont4\MicroServiceLogger\Middleware;
 
 use Closure;
 use Illuminate\Support\Str;
